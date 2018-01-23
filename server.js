@@ -80,4 +80,13 @@ app.post("/burgers", function(req, res) {
 		res.json({ id: result.insertId });
 		console.log({ id: result.insertId });
 	});
-})
+});
+
+
+//Updating the burger, when devour status changes
+app.post("/devourburger", function(req,res) {
+	//Updating on mysql
+	connection.query("UPDATE burgers SET devoured = true WHERE id = ?", [req.body.burgerId], function(err, response) {
+		res.redirect("/");
+	});
+});
